@@ -1,0 +1,776 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+
+<head>
+    <meta charset="UTF-8">
+    <title>日本新幹線旅遊攻略</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <style>
+        /* ======= RESET ======= */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        /* ======= BODY & GLOBAL ======= */
+        body {
+            font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+            background-color: #ffffff;
+            color: #333333;
+            line-height: 1.8;
+            overflow-x: hidden;
+        }
+
+        a {
+            text-decoration: none;
+            color: inherit;
+        }
+
+        /* ======= NAVBAR ======= */
+        nav {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 70px;
+            background: rgba(255, 255, 255, 0.95);
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 0 30px;
+            z-index: 1000;
+        }
+
+        nav .logo {
+            font-size: 1.5rem;
+            font-weight: bold;
+            color: #555555;
+            cursor: pointer;
+        }
+
+        nav ul {
+            list-style: none;
+            display: flex;
+        }
+
+        nav ul li {
+            margin-left: 25px;
+        }
+
+        nav ul li a {
+            font-size: 1rem;
+            color: #555555;
+            transition: color 0.3s;
+        }
+
+        nav ul li a:hover {
+            color: #8d8d8d;
+            /* 更柔和的變色 */
+        }
+
+        /* ======= HERO SECTION ======= */
+        .hero {
+            width: 100%;
+            height: 90vh;
+            background: url('images/01.jpg') no-repeat center center/cover;
+            display: flex;
+            align-items: flex-end;
+            /* 文字置底 */
+            justify-content: center;
+            position: relative;
+            margin-top: 70px;
+            /* 為固定導航列預留空間 */
+            filter: brightness(70%) contrast(110%);
+            /* 調整亮度和對比度 */
+        }
+
+        .hero::after {
+            content: "";
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: rgba(0, 0, 0, 0.3);
+            /* 減少遮罩透明度 */
+            z-index: 1;
+            /* 確保遮罩在文字下方 */
+        }
+
+        .hero-text {
+            position: relative;
+            text-align: center;
+            max-width: 80%;
+            animation: fadeInUp 2s ease forwards;
+            opacity: 0;
+            /* 移除半透明背景色，僅依靠文字陰影 */
+            padding: 20px;
+            border-radius: 8px;
+            z-index: 2;
+            /* 確保文字在遮罩上方 */
+            margin-bottom: 50px;
+            /* 調整文字與底部的距離 */
+        }
+
+        .hero-text h2 {
+            font-size: 3rem;
+            /* 更大的字體 */
+            margin-bottom: 20px;
+            letter-spacing: 2px;
+            color: #ffffff;
+            /* 白色 */
+            text-shadow: 2px 2px 6px rgba(0, 0, 0, 0);
+            /* 調整陰影透明度 */
+            font-weight: 700;
+            /* 加粗 */
+        }
+
+        .hero-text p {
+            font-size: 1.5rem;
+            /* 更大的字體 */
+            color: #ffffff;
+            /* 白色 */
+            text-shadow: 1px 1px 4px rgba(0, 0, 0, 0.6);
+            /* 調整陰影透明度 */
+            font-weight: 600;
+            /* 加粗 */
+        }
+
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        /* ======= SECTION STYLES ======= */
+        .section {
+            max-width: 1200px;
+            margin: 60px auto;
+            padding: 0 30px;
+        }
+
+        .section-title {
+            font-size: 2rem;
+            margin-bottom: 20px;
+            color: #555555;
+            position: relative;
+            text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.3);
+            /* 添加陰影 */
+        }
+
+        .section-title::after {
+            content: "";
+            width: 50px;
+            height: 3px;
+            background: #a0a0a0;
+            /* 更柔和的線條顏色 */
+            position: absolute;
+            left: 0;
+            bottom: -5px;
+        }
+
+        .section p {
+            margin-bottom: 20px;
+            color: #666666;
+        }
+
+        /* ======= IMAGE BANNER ======= */
+        .img-banner {
+            width: 100%;
+            height: 300px;
+            background-position: center;
+            background-size: cover;
+            border-radius: 8px;
+            margin-bottom: 30px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.05);
+            transition: transform 0.3s;
+        }
+
+        .img-banner:hover {
+            transform: scale(1.02);
+        }
+
+        /* ======= ACCORDION ======= */
+        .accordion {
+            margin-top: 20px;
+        }
+
+        .accordion-item {
+            background: #f9f9f9;
+            border: 1px solid #e0e0e0;
+            border-radius: 8px;
+            margin-bottom: 15px;
+            overflow: hidden;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.02);
+            transition: box-shadow 0.3s;
+        }
+
+        .accordion-item:hover {
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.05);
+        }
+
+        .accordion-header {
+            padding: 20px;
+            background: #a0a0a0;
+            /* 更柔和的顏色 */
+            color: #ffffff;
+            cursor: pointer;
+            position: relative;
+            font-size: 1.1rem;
+            transition: background 0.3s;
+            text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.3);
+            /* 添加陰影 */
+        }
+
+        .accordion-header:hover {
+            background: #8d8d8d;
+            /* 更柔和的變色 */
+        }
+
+        .accordion-header::after {
+            content: "+";
+            position: absolute;
+            right: 20px;
+            font-size: 1.5rem;
+            transition: transform 0.3s;
+        }
+
+        .accordion-header.active::after {
+            transform: rotate(45deg);
+        }
+
+        .accordion-body {
+            max-height: 0;
+            overflow: hidden;
+            transition: max-height 0.5s ease;
+            background: #ffffff;
+            padding: 0 20px;
+        }
+
+        .accordion-body p,
+        .accordion-body ul,
+        .accordion-body table {
+            padding: 15px 0;
+            color: #555555;
+        }
+
+        .accordion-body ul {
+            list-style: disc inside;
+        }
+
+        .accordion-body table {
+            width: 100%;
+            border-collapse: collapse;
+        }
+
+        .accordion-body table th,
+        .accordion-body table td {
+            border: 1px solid #dddddd;
+            padding: 10px;
+            text-align: left;
+        }
+
+        .accordion-body table th {
+            background: #f2f2f2;
+        }
+
+        /* ======= FOOTER ======= */
+        footer {
+            background: #f5f5f5;
+            color: #888888;
+            text-align: center;
+            padding: 20px 0;
+            margin-top: 60px;
+        }
+
+        footer p {
+            font-size: 0.95rem;
+        }
+
+        /* ======= SCROLL ANIMATION ======= */
+        .fade-in-section {
+            opacity: 0;
+            transform: translateY(20px);
+            transition: opacity 1s ease-out, transform 1s ease-out;
+            will-change: opacity, transform;
+        }
+
+        .fade-in-section.is-visible {
+            opacity: 1;
+            transform: none;
+        }
+
+        /* ======= RESPONSIVE ======= */
+        @media (max-width: 768px) {
+            nav {
+                flex-direction: column;
+                align-items: flex-start;
+                padding: 10px 20px;
+                height: auto;
+            }
+
+            nav ul {
+                flex-direction: column;
+                width: 100%;
+            }
+
+            nav ul li {
+                margin: 10px 0;
+            }
+
+            .hero {
+                height: 60vh;
+            }
+
+            .hero-text h2 {
+                font-size: 2rem;
+            }
+
+            .img-banner {
+                height: 200px;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+    <!-- ======= NAVBAR ======= -->
+    <nav>
+        <div class="logo" onclick="window.scrollTo({ top:0, behavior:'smooth' })">新幹線攻略</div>
+        <ul>
+            <li><a href="#all-stations">所有車站</a></li>
+            <li><a href="#major-distance">大城市距離</a></li>
+            <li><a href="#example-route">範例路線</a></li>
+        </ul>
+    </nav>
+
+    <!-- ======= HERO SECTION ======= -->
+    <section class="hero fade-in-section" id="hero">
+        <div class="hero-text">
+            <h2>日本新幹線旅遊攻略</h2>
+            <p>從九州出發，一路通往北海道，體驗日本縱貫的高速鐵路之旅</p>
+        </div>
+    </section>
+
+    <!-- ======= SECTION 1: 所有車站 ======= -->
+    <div class="section fade-in-section" id="all-stations">
+        <h3 class="section-title">1. 日本新幹線全線車站與在地特色</h3>
+        <div class="img-banner" style="background-image: url('images/02.jpg');"></div>
+
+        <p>以下整理了日本新幹線主要路線（含迷你新幹線），自南(九州)而北(北海道)的所有車站與在地特色。</p>
+
+        <!-- Accordion -->
+        <div class="accordion">
+            <!-- 九州新幹線 -->
+            <div class="accordion-item">
+                <div class="accordion-header">九州新幹線（鹿兒島中央 ⇄ 博多）</div>
+                <div class="accordion-body">
+                    <p><strong>營運路段：</strong>鹿兒島中央～博多，串接山陽新幹線於博多站。</p>
+                    <ul>
+                        <li><strong>鹿兒島中央站：</strong>眺望櫻島火山、黑豚料理、黑糖燒酎</li>
+                        <li><strong>薩摩川內站：</strong>川內高城溫泉</li>
+                        <li><strong>出水站：</strong>冬季鶴群棲息</li>
+                        <li><strong>新八代站：</strong>八代名產晩白柚</li>
+                        <li><strong>新玉名站：</strong>玉名溫泉、玉名拉麵</li>
+                        <li><strong>熊本站：</strong>熊本城、馬刺し、熊本熊</li>
+                        <li><strong>新大牟田站：</strong>三池煤礦遺跡、大牟田拉麵</li>
+                        <li><strong>筑後船小屋站：</strong>船小屋溫泉、水果盛產</li>
+                        <li><strong>久留米站：</strong>豚骨拉麵、燒鳥、久留米絣</li>
+                        <li><strong>新鳥栖站：</strong>鳥栖 Premium Outlets、足球隊本拠地</li>
+                        <li><strong>博多站：</strong>福岡市中心、明太子、屋台文化</li>
+                    </ul>
+                </div>
+            </div>
+
+            <!-- 山陽新幹線 -->
+            <div class="accordion-item">
+                <div class="accordion-header">山陽新幹線（博多 ⇄ 新大阪）</div>
+                <div class="accordion-body">
+                    <p><strong>營運路段：</strong>博多～新大阪，全線與東海道新幹線相接。</p>
+                    <ul>
+                        <li><strong>博多站：</strong>豚骨拉麵、明太子、商業中心</li>
+                        <li><strong>小倉站：</strong>小倉城、小倉燒咖哩</li>
+                        <li><strong>新下關站：</strong>下關河豚料理、關門海峽</li>
+                        <li><strong>新山口站：</strong>湯田溫泉、瑠璃光寺</li>
+                        <li><strong>德山站：</strong>周南市、瀨戶內海</li>
+                        <li><strong>新岩國站：</strong>錦帶橋、岩國壽司</li>
+                        <li><strong>廣島站：</strong>和平公園、嚴島神社、廣島燒</li>
+                        <li><strong>東廣島站：</strong>西條清酒</li>
+                        <li><strong>三原站：</strong>章魚料理、瀨戶內海</li>
+                        <li><strong>新尾道站：</strong>尾道老街、貓之細道</li>
+                        <li><strong>福山站：</strong>福山城、玫瑰之城</li>
+                        <li><strong>新倉敷站：</strong>倉敷美觀地區</li>
+                        <li><strong>岡山站：</strong>後樂園、岡山城、吉備糰子</li>
+                        <li><strong>相生站：</strong>瀨戶內海沿岸</li>
+                        <li><strong>姬路站：</strong>世界遺產姬路城</li>
+                        <li><strong>西明石站：</strong>明石燒</li>
+                        <li><strong>新神戶站：</strong>神戶牛、六甲山</li>
+                        <li><strong>新大阪站：</strong>大阪美食、關西樞紐</li>
+                    </ul>
+                </div>
+            </div>
+
+            <!-- 東海道新幹線 -->
+            <div class="accordion-item">
+                <div class="accordion-header">東海道新幹線（新大阪 ⇄ 東京）</div>
+                <div class="accordion-body">
+                    <p><strong>營運路段：</strong>新大阪～東京，串起關西～中部～關東；日本最繁忙。</p>
+                    <ul>
+                        <li><strong>新大阪站：</strong>大阪美食、交通樞紐</li>
+                        <li><strong>京都站：</strong>古都、清水寺、金閣寺、和菓子</li>
+                        <li><strong>米原站：</strong>琵琶湖、彥根城</li>
+                        <li><strong>岐阜羽島站：</strong>長良川鵜飼</li>
+                        <li><strong>名古屋站：</strong>名古屋城、味噌豬排、鰻魚飯</li>
+                        <li><strong>三河安城站：</strong>工業區</li>
+                        <li><strong>豊橋站：</strong>竹輪、手筒煙火</li>
+                        <li><strong>濱松站：</strong>鰻魚料理、濱名湖</li>
+                        <li><strong>掛川站：</strong>掛川城、茶葉產地</li>
+                        <li><strong>靜岡站：</strong>富士山景、綠茶、芥末</li>
+                        <li><strong>新富士站：</strong>富士市、工業區</li>
+                        <li><strong>三島站：</strong>伊豆玄關、鰻魚</li>
+                        <li><strong>熱海站：</strong>溫泉</li>
+                        <li><strong>小田原站：</strong>小田原城、箱根玄關</li>
+                        <li><strong>新橫濱站：</strong>橫濱拉麵博物館、港未來</li>
+                        <li><strong>品川站：</strong>東京南部商務區</li>
+                        <li><strong>東京站：</strong>丸之內赤磚站舍、首都核心</li>
+                    </ul>
+                </div>
+            </div>
+
+            <!-- 東北新幹線 -->
+            <div class="accordion-item">
+                <div class="accordion-header">東北新幹線（東京 ⇄ 新青森）</div>
+                <div class="accordion-body">
+                    <p><strong>營運路段：</strong>東京～新青森，可再往北海道新幹線。</p>
+                    <ul>
+                        <li><strong>上野站：</strong>上野公園、阿美橫町</li>
+                        <li><strong>大宮站：</strong>鐵道博物館、盆栽村</li>
+                        <li><strong>宇都宮站：</strong>餃子之城、日光玄關</li>
+                        <li><strong>郡山站：</strong>近猪苗代湖</li>
+                        <li><strong>福島站：</strong>桃子產地、飯坂溫泉</li>
+                        <li><strong>白石藏王站：</strong>藏王樹冰、狐狸村</li>
+                        <li><strong>仙台站：</strong>東北最大城，牛舌、ずんだ餅</li>
+                        <li><strong>古川站：</strong>大崎市、溫泉</li>
+                        <li><strong>栗駒高原站：</strong>栗駒山</li>
+                        <li><strong>一之關站：</strong>猊鼻溪、嚴美溪</li>
+                        <li><strong>水澤江刺站：</strong>奧州市、藤原之里</li>
+                        <li><strong>北上站：</strong>展勝地櫻花</li>
+                        <li><strong>新花卷站：</strong>宮澤賢治故鄉</li>
+                        <li><strong>盛岡站：</strong>冷麵、じゃじゃ麵、わんこそば</li>
+                        <li><strong>岩手沼宮內站：</strong>高原農業</li>
+                        <li><strong>二戶站：</strong>漆器、馬肉料理</li>
+                        <li><strong>八戶站：</strong>太平洋漁港</li>
+                        <li><strong>七戶十和田站：</strong>十和田湖</li>
+                        <li><strong>新青森站：</strong>青森睡魔祭、蘋果</li>
+                    </ul>
+                </div>
+            </div>
+
+            <!-- 北海道新幹線 -->
+            <div class="accordion-item">
+                <div class="accordion-header">北海道新幹線（新青森 ⇄ 新函館北斗）</div>
+                <div class="accordion-body">
+                    <p><strong>營運路段：</strong>目前為新青森～新函館北斗，將延伸至札幌。</p>
+                    <ul>
+                        <li><strong>奧津輕今別站：</strong>津輕海峽、龍飛崎</li>
+                        <li><strong>木古內站：</strong>松前城、海鮮</li>
+                        <li><strong>新函館北斗站：</strong>函館夜景、海鮮拉麵</li>
+                    </ul>
+                </div>
+            </div>
+
+            <!-- 上越、北陸、山形、秋田新幹線簡要 -->
+            <div class="accordion-item">
+                <div class="accordion-header">其他線：上越、北陸、山形、秋田新幹線</div>
+                <div class="accordion-body">
+                    <p>
+                        <strong>上越新幹線（東京 ⇄ 新潟）：</strong>東京、大宮、熊谷、高崎、越後湯澤、長岡、燕三條、新潟<br>
+                        <strong>北陸新幹線（東京 ⇄ 金澤）：</strong>東京、大宮、高崎、輕井澤、長野、富山、金澤<br>
+                        <strong>山形新幹線（福島 ⇄ 新庄）：</strong>福島、米澤、山形、天童、新庄 (迷你新幹線)<br>
+                        <strong>秋田新幹線（盛岡 ⇄ 秋田）：</strong>盛岡、角館、大曲、秋田 (迷你新幹線)
+                    </p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- ======= SECTION 2: 大城市距離與時間 ======= -->
+    <div class="section fade-in-section" id="major-distance">
+        <h3 class="section-title">2. 只停留主要大城市：距離與時間</h3>
+        <div class="img-banner" style="background-image: url('images/03.jpg');"></div>
+
+        <p>以下列出了「只停主要都市」時，各路線區間的營業距離與最快車種所需時間。實際會因班次、停車站數量而略有不同。</p>
+
+        <!-- Accordion -->
+        <div class="accordion">
+            <!-- 九州新幹線(大城市) -->
+            <div class="accordion-item">
+                <div class="accordion-header">九州新幹線</div>
+                <div class="accordion-body">
+                    <table>
+                        <tr>
+                            <th>區間</th>
+                            <th>距離(約)</th>
+                            <th>最短時間(約)</th>
+                        </tr>
+                        <tr>
+                            <td>鹿兒島中央 → 熊本</td>
+                            <td>117 km</td>
+                            <td>約35 分 (Mizuho/Sakura)</td>
+                        </tr>
+                        <tr>
+                            <td>熊本 → 博多</td>
+                            <td>140 km</td>
+                            <td>約33～35 分</td>
+                        </tr>
+                        <tr>
+                            <td><strong>鹿兒島中央 → 博多(全程)</strong></td>
+                            <td>257 km</td>
+                            <td>約1 小時 10～20 分</td>
+                        </tr>
+                    </table>
+                </div>
+            </div>
+
+            <!-- 山陽新幹線(大城市) -->
+            <div class="accordion-item">
+                <div class="accordion-header">山陽新幹線</div>
+                <div class="accordion-body">
+                    <table>
+                        <tr>
+                            <th>區間</th>
+                            <th>距離(約)</th>
+                            <th>最短時間(約)</th>
+                        </tr>
+                        <tr>
+                            <td>博多 → 廣島</td>
+                            <td>272 km</td>
+                            <td>約1 小時 02 分</td>
+                        </tr>
+                        <tr>
+                            <td>廣島 → 岡山</td>
+                            <td>120 km</td>
+                            <td>約34～40 分</td>
+                        </tr>
+                        <tr>
+                            <td>岡山 → 新神戶</td>
+                            <td>129 km</td>
+                            <td>約33～35 分</td>
+                        </tr>
+                        <tr>
+                            <td>新神戶 → 新大阪</td>
+                            <td>33 km</td>
+                            <td>約13～15 分</td>
+                        </tr>
+                        <tr>
+                            <td><strong>博多 → 新大阪(全程)</strong></td>
+                            <td>554 km</td>
+                            <td>約2 小時 20～30 分</td>
+                        </tr>
+                    </table>
+                </div>
+            </div>
+
+            <!-- 東海道新幹線(大城市) -->
+            <div class="accordion-item">
+                <div class="accordion-header">東海道新幹線</div>
+                <div class="accordion-body">
+                    <table>
+                        <tr>
+                            <th>區間</th>
+                            <th>距離(約)</th>
+                            <th>最短時間(約)</th>
+                        </tr>
+                        <tr>
+                            <td>新大阪 → 京都</td>
+                            <td>39 km</td>
+                            <td>約14～15 分 (Nozomi)</td>
+                        </tr>
+                        <tr>
+                            <td>京都 → 名古屋</td>
+                            <td>134 km</td>
+                            <td>約34～38 分</td>
+                        </tr>
+                        <tr>
+                            <td>名古屋 → 新橫濱</td>
+                            <td>316 km</td>
+                            <td>約73～80 分</td>
+                        </tr>
+                        <tr>
+                            <td>新橫濱 → 東京</td>
+                            <td>26 km</td>
+                            <td>約18～20 分</td>
+                        </tr>
+                        <tr>
+                            <td><strong>新大阪 → 東京(全程)</strong></td>
+                            <td>515 km</td>
+                            <td>約2 小時 30～40 分</td>
+                        </tr>
+                    </table>
+                </div>
+            </div>
+
+            <!-- 東北新幹線(大城市) -->
+            <div class="accordion-item">
+                <div class="accordion-header">東北新幹線</div>
+                <div class="accordion-body">
+                    <table>
+                        <tr>
+                            <th>區間</th>
+                            <th>距離(約)</th>
+                            <th>最短時間(約)</th>
+                        </tr>
+                        <tr>
+                            <td>東京 → 大宮</td>
+                            <td>30 km</td>
+                            <td>約25～30 分 (Hayabusa)</td>
+                        </tr>
+                        <tr>
+                            <td>大宮 → 仙台</td>
+                            <td>322 km</td>
+                            <td>約1 小時 05 分</td>
+                        </tr>
+                        <tr>
+                            <td>仙台 → 盛岡</td>
+                            <td>184 km</td>
+                            <td>約35～40 分</td>
+                        </tr>
+                        <tr>
+                            <td>盛岡 → 新青森</td>
+                            <td>140 km</td>
+                            <td>約40 分</td>
+                        </tr>
+                        <tr>
+                            <td><strong>東京 → 新青森</strong></td>
+                            <td>675 km</td>
+                            <td>約3 小時</td>
+                        </tr>
+                    </table>
+                </div>
+            </div>
+
+            <!-- 北海道新幹線(大城市) -->
+            <div class="accordion-item">
+                <div class="accordion-header">北海道新幹線</div>
+                <div class="accordion-body">
+                    <table>
+                        <tr>
+                            <th>區間</th>
+                            <th>距離(約)</th>
+                            <th>最短時間(約)</th>
+                        </tr>
+                        <tr>
+                            <td>新青森 → 新函館北斗</td>
+                            <td>149 km</td>
+                            <td>約1 小時</td>
+                        </tr>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- ======= SECTION 3: 範例路線 ======= -->
+    <div class="section fade-in-section" id="example-route">
+        <h3 class="section-title">3. 綜合路線示例：鹿兒島中央 → 新函館北斗</h3>
+        <div class="img-banner" style="background-image: url('images/04.jpg');"></div>
+
+        <p>若您想從日本最南端的鹿兒島中央，一路前往北海道的新函館北斗，僅在主要大城市換乘並搭乘最快車種，理想情況下約 10 小時出頭即可達成：</p>
+        <ul>
+            <li>鹿兒島中央 → 博多：約 1 小時 10～20 分</li>
+            <li>博多 → 新大阪：約 2 小時 20～30 分</li>
+            <li>新大阪 → 東京：約 2 小時 30～40 分</li>
+            <li>東京 → 新青森：約 3 小時</li>
+            <li>新青森 → 新函館北斗：約 1 小時</li>
+        </ul>
+        <p style="margin-top: 10px; color: #555555;">
+            * 實際旅程需考量班次時刻、轉車時間、天候狀況等因素，總時程可能有所增減。
+        </p>
+    </div>
+
+    <!-- ======= FOOTER ======= -->
+    <footer>
+        <p>© 2024 ChatGPT 整理 — 僅供個人旅遊參考</p>
+    </footer>
+
+    <!-- ======= JavaScript ======= -->
+    <script>
+        // ======= Accordion Functionality =======
+        document.querySelectorAll('.accordion-header').forEach(function (header) {
+            header.addEventListener('click', function () {
+                // Toggle active class
+                this.classList.toggle('active');
+                // Toggle the corresponding accordion body
+                const body = this.nextElementSibling;
+                if (this.classList.contains('active')) {
+                    body.style.maxHeight = body.scrollHeight + "px";
+                } else {
+                    body.style.maxHeight = null;
+                }
+            });
+        });
+
+        // ======= Scroll Animation =======
+        const faders = document.querySelectorAll('.fade-in-section');
+
+        const appearOptions = {
+            threshold: 0.1,
+            rootMargin: "0px 0px -50px 0px"
+        };
+
+        const appearOnScroll = new IntersectionObserver(function (entries, appearOnScroll) {
+            entries.forEach(entry => {
+                if (!entry.isIntersecting) {
+                    return;
+                } else {
+                    entry.target.classList.add('is-visible');
+                    appearOnScroll.unobserve(entry.target);
+                }
+            });
+        }, appearOptions);
+
+        faders.forEach(fader => {
+            appearOnScroll.observe(fader);
+        });
+
+        // ======= Smooth Scroll on Navbar Links =======
+        const navLinks = document.querySelectorAll('nav ul li a');
+
+        navLinks.forEach(link => {
+            link.addEventListener('click', function (e) {
+                e.preventDefault();
+                const targetId = this.getAttribute('href').substring(1);
+                const targetSection = document.getElementById(targetId);
+                window.scrollTo({
+                    top: targetSection.offsetTop - 70, // Adjust for navbar height
+                    behavior: 'smooth'
+                });
+            });
+        });
+
+        // ======= Fade-in Sections =======
+        window.addEventListener('scroll', function () {
+            const elements = document.querySelectorAll('.fade-in-section');
+            const windowHeight = window.innerHeight;
+            elements.forEach(element => {
+                const pos = element.getBoundingClientRect().top;
+                if (pos < windowHeight - 100) {
+                    element.classList.add('is-visible');
+                }
+            });
+        });
+    </script>
+
+</body>
+
+</html>
