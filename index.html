@@ -6,6 +6,14 @@
     <title>日本新幹線旅遊攻略</title>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
+    <!-- Google Fonts -->
+    <link
+        href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700&family=Noto+Serif+JP:wght@400;700&display=swap"
+        rel="stylesheet">
+
+    <!-- 移除 Font Awesome -->
+    <!-- Font Awesome 已被移除 -->
+
     <style>
         /* ======= RESET ======= */
         * {
@@ -16,16 +24,21 @@
 
         /* ======= BODY & GLOBAL ======= */
         body {
-            font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
-            background-color: #ffffff;
+            font-family: 'Roboto', sans-serif;
+            background-color: #f9f9f9;
             color: #333333;
-            line-height: 1.8;
+            line-height: 1.6;
             overflow-x: hidden;
         }
 
         a {
             text-decoration: none;
-            color: inherit;
+            color: #ff6f61;
+            transition: color 0.3s;
+        }
+
+        a:hover {
+            color: #e55b50;
         }
 
         /* ======= NAVBAR ======= */
@@ -34,169 +47,178 @@
             top: 0;
             left: 0;
             right: 0;
-            height: 70px;
+            height: 80px;
             background: rgba(255, 255, 255, 0.95);
-            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
             display: flex;
             align-items: center;
             justify-content: space-between;
-            padding: 0 30px;
+            padding: 0 60px;
             z-index: 1000;
+            transition: background 0.3s, padding 0.3s;
         }
 
         nav .logo {
-            font-size: 1.5rem;
-            font-weight: bold;
-            color: #555555;
+            font-family: 'Noto Serif JP', serif;
+            font-size: 2rem;
+            font-weight: 700;
+            color: #ff6f61;
             cursor: pointer;
+            position: relative;
+        }
+
+        /* 加入紅點設計 */
+        nav .logo::after {
+            content: "";
+            position: absolute;
+            width: 8px;
+            height: 8px;
+            background-color: #ff6f61;
+            border-radius: 50%;
+            top: 5px;
+            right: -15px;
+            animation: bounce 2s infinite;
+        }
+
+        @keyframes bounce {
+
+            0%,
+            100% {
+                transform: translateY(0);
+            }
+
+            50% {
+                transform: translateY(-5px);
+            }
         }
 
         nav ul {
             list-style: none;
             display: flex;
+            align-items: center;
         }
 
         nav ul li {
-            margin-left: 25px;
+            margin-left: 30px;
         }
 
         nav ul li a {
             font-size: 1rem;
-            color: #555555;
+            color: #333333;
+            position: relative;
+            padding-bottom: 5px;
             transition: color 0.3s;
         }
 
-        nav ul li a:hover {
-            color: #8d8d8d;
-            /* 更柔和的變色 */
+        nav ul li a::after {
+            content: '';
+            position: absolute;
+            width: 0%;
+            height: 2px;
+            background: #ff6f61;
+            left: 0;
+            bottom: 0;
+            transition: width 0.3s;
+        }
+
+        nav ul li a:hover::after {
+            width: 100%;
         }
 
         /* ======= HERO SECTION ======= */
         .hero {
             width: 100%;
             height: 90vh;
-            background: url('images/01.jpg') no-repeat center center/cover;
+            background: url('01.jpg') center center / cover no-repeat;
             display: flex;
-            align-items: flex-end;
-            /* 文字置底 */
+            align-items: center;
             justify-content: center;
             position: relative;
-            margin-top: 70px;
+            margin-top: 80px;
             /* 為固定導航列預留空間 */
-            filter: brightness(70%) contrast(110%);
-            /* 調整亮度和對比度 */
+            background-blend-mode: darken;
+            background-color: rgba(0, 0, 0, 0.4);
+            animation: fadeInBackground 1.5s ease-in-out forwards;
+            opacity: 0;
         }
 
-        .hero::after {
-            content: "";
-            position: absolute;
-            top: 0;
-            left: 0;
-            right: 0;
-            bottom: 0;
-            background: rgba(0, 0, 0, 0.3);
-            /* 減少遮罩透明度 */
-            z-index: 1;
-            /* 確保遮罩在文字下方 */
+        @keyframes fadeInBackground {
+            to {
+                opacity: 1;
+            }
         }
 
         .hero-text {
-            position: relative;
             text-align: center;
-            max-width: 80%;
-            animation: fadeInUp 2s ease forwards;
+            color: #ffffff;
+            max-width: 800px;
+            padding: 30px;
+            border-radius: 15px;
+            background: rgba(0, 0, 0, 0.6);
+            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.3);
+            animation: slideIn 1s ease-out forwards;
+            transform: translateY(50px);
             opacity: 0;
-            /* 移除半透明背景色，僅依靠文字陰影 */
-            padding: 20px;
-            border-radius: 8px;
-            z-index: 2;
-            /* 確保文字在遮罩上方 */
-            margin-bottom: 50px;
-            /* 調整文字與底部的距離 */
         }
 
-        .hero-text h2 {
+        @keyframes slideIn {
+            to {
+                transform: translateY(0);
+                opacity: 1;
+            }
+        }
+
+        .hero-text h1 {
+            font-family: 'Noto Serif JP', serif;
             font-size: 3rem;
-            /* 更大的字體 */
             margin-bottom: 20px;
-            letter-spacing: 2px;
-            color: #ffffff;
-            /* 白色 */
-            text-shadow: 2px 2px 6px rgba(0, 0, 0, 0);
-            /* 調整陰影透明度 */
             font-weight: 700;
-            /* 加粗 */
         }
 
         .hero-text p {
-            font-size: 1.5rem;
-            /* 更大的字體 */
-            color: #ffffff;
-            /* 白色 */
-            text-shadow: 1px 1px 4px rgba(0, 0, 0, 0.6);
-            /* 調整陰影透明度 */
-            font-weight: 600;
-            /* 加粗 */
-        }
-
-        @keyframes fadeInUp {
-            from {
-                opacity: 0;
-                transform: translateY(30px);
-            }
-
-            to {
-                opacity: 1;
-                transform: translateY(0);
-            }
+            font-size: 1.2rem;
+            font-weight: 400;
         }
 
         /* ======= SECTION STYLES ======= */
         .section {
             max-width: 1200px;
-            margin: 60px auto;
-            padding: 0 30px;
+            margin: 80px auto;
+            padding: 0 40px;
+            opacity: 0;
+            transform: translateY(30px);
+            transition: opacity 1s ease-out, transform 1s ease-out;
+        }
+
+        .section.is-visible {
+            opacity: 1;
+            transform: translateY(0);
         }
 
         .section-title {
-            font-size: 2rem;
-            margin-bottom: 20px;
-            color: #555555;
+            font-family: 'Noto Serif JP', serif;
+            font-size: 2.5rem;
+            margin-bottom: 25px;
+            color: #ff6f61;
             position: relative;
-            text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.3);
-            /* 添加陰影 */
+            display: inline-block;
         }
 
         .section-title::after {
             content: "";
-            width: 50px;
-            height: 3px;
-            background: #a0a0a0;
-            /* 更柔和的線條顏色 */
+            width: 60px;
+            height: 4px;
+            background: #ff6f61;
             position: absolute;
             left: 0;
-            bottom: -5px;
+            bottom: -10px;
+            border-radius: 2px;
         }
 
         .section p {
-            margin-bottom: 20px;
-            color: #666666;
-        }
-
-        /* ======= IMAGE BANNER ======= */
-        .img-banner {
-            width: 100%;
-            height: 300px;
-            background-position: center;
-            background-size: cover;
-            border-radius: 8px;
-            margin-bottom: 30px;
-            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.05);
-            transition: transform 0.3s;
-        }
-
-        .img-banner:hover {
-            transform: scale(1.02);
+            margin-bottom: 25px;
+            color: #555555;
+            font-size: 1.05rem;
         }
 
         /* ======= ACCORDION ======= */
@@ -205,117 +227,203 @@
         }
 
         .accordion-item {
-            background: #f9f9f9;
+            background: #ffffff;
             border: 1px solid #e0e0e0;
-            border-radius: 8px;
-            margin-bottom: 15px;
+            border-radius: 10px;
+            margin-bottom: 20px;
             overflow: hidden;
-            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.02);
             transition: box-shadow 0.3s;
+            position: relative;
         }
 
         .accordion-item:hover {
-            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.05);
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.05);
         }
 
         .accordion-header {
-            padding: 20px;
-            background: #a0a0a0;
-            /* 更柔和的顏色 */
-            color: #ffffff;
+            padding: 18px 25px;
+            background: #f2f2f2;
+            color: #333333;
             cursor: pointer;
             position: relative;
-            font-size: 1.1rem;
+            font-size: 1.2rem;
+            font-weight: 600;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
             transition: background 0.3s;
-            text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.3);
-            /* 添加陰影 */
         }
 
         .accordion-header:hover {
-            background: #8d8d8d;
-            /* 更柔和的變色 */
+            background: #e6e6e6;
         }
 
         .accordion-header::after {
-            content: "+";
-            position: absolute;
-            right: 20px;
-            font-size: 1.5rem;
+            content: "\25BC";
+            /* Unicode 字符 ▼ */
+            font-size: 1rem;
             transition: transform 0.3s;
         }
 
         .accordion-header.active::after {
-            transform: rotate(45deg);
+            transform: rotate(180deg);
         }
 
         .accordion-body {
             max-height: 0;
             overflow: hidden;
             transition: max-height 0.5s ease;
-            background: #ffffff;
-            padding: 0 20px;
-        }
-
-        .accordion-body p,
-        .accordion-body ul,
-        .accordion-body table {
-            padding: 15px 0;
-            color: #555555;
+            padding: 0 25px;
+            background: #fafafa;
         }
 
         .accordion-body ul {
             list-style: disc inside;
+            padding: 20px 0;
         }
 
-        .accordion-body table {
+        .accordion-body li {
+            margin-bottom: 15px;
+            font-size: 1rem;
+            color: #555555;
+            position: relative;
+            padding-left: 20px;
+        }
+
+        /* 添加紅點作為列表項的標記 */
+        .accordion-body li::before {
+            content: "";
+            position: absolute;
+            left: 0;
+            top: 50%;
+            transform: translateY(-50%);
+            width: 8px;
+            height: 8px;
+            background-color: #ff6f61;
+            border-radius: 50%;
+        }
+
+        .accordion-body a.search-button {
+            margin-left: 10px;
+            font-size: 0.95rem;
+            background: #ff6f61;
+            color: #ffffff;
+            padding: 6px 12px;
+            border-radius: 20px;
+            transition: background 0.3s, transform 0.2s, box-shadow 0.3s;
+            text-decoration: none;
+            display: inline-block;
+        }
+
+        .accordion-body a.search-button:hover {
+            background: #e55b50;
+            transform: translateY(-2px);
+            box-shadow: 0 6px 12px rgba(0, 0, 0, 0.15);
+        }
+
+        .accordion-body a.search-button:active {
+            transform: translateY(0);
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+        }
+
+        /* ======= TABLE STYLES ======= */
+        table {
             width: 100%;
             border-collapse: collapse;
+            margin-top: 20px;
         }
 
-        .accordion-body table th,
-        .accordion-body table td {
+        table th,
+        table td {
             border: 1px solid #dddddd;
-            padding: 10px;
+            padding: 12px 15px;
             text-align: left;
         }
 
-        .accordion-body table th {
-            background: #f2f2f2;
+        table th {
+            background: #ff6f61;
+            color: #ffffff;
+            font-size: 1rem;
+        }
+
+        table td {
+            font-size: 0.95rem;
+            color: #555555;
+        }
+
+        table tr:nth-child(even) {
+            background: #f9f9f9;
         }
 
         /* ======= FOOTER ======= */
         footer {
-            background: #f5f5f5;
-            color: #888888;
+            background: #333333;
+            color: #ffffff;
             text-align: center;
-            padding: 20px 0;
+            padding: 30px 20px;
             margin-top: 60px;
         }
 
         footer p {
-            font-size: 0.95rem;
+            font-size: 0.9rem;
         }
 
         /* ======= SCROLL ANIMATION ======= */
         .fade-in-section {
             opacity: 0;
-            transform: translateY(20px);
+            transform: translateY(30px);
             transition: opacity 1s ease-out, transform 1s ease-out;
             will-change: opacity, transform;
         }
 
         .fade-in-section.is-visible {
             opacity: 1;
-            transform: none;
+            transform: translateY(0);
         }
 
         /* ======= RESPONSIVE ======= */
+        @media (max-width: 992px) {
+            nav {
+                padding: 0 30px;
+            }
+
+            nav .logo {
+                font-size: 1.5rem;
+            }
+
+            nav ul li {
+                margin-left: 20px;
+            }
+
+            .hero-text h1 {
+                font-size: 2.5rem;
+            }
+
+            .section-title {
+                font-size: 2rem;
+            }
+
+            .section p {
+                font-size: 1rem;
+            }
+
+            .accordion-body a.search-button {
+                padding: 5px 10px;
+                font-size: 0.9rem;
+            }
+
+            table th,
+            table td {
+                padding: 10px 12px;
+                font-size: 0.9rem;
+            }
+        }
+
         @media (max-width: 768px) {
             nav {
                 flex-direction: column;
                 align-items: flex-start;
-                padding: 10px 20px;
-                height: auto;
+                padding: 15px 20px;
             }
 
             nav ul {
@@ -328,15 +436,115 @@
             }
 
             .hero {
-                height: 60vh;
+                height: 70vh;
             }
 
-            .hero-text h2 {
+            .hero-text h1 {
                 font-size: 2rem;
             }
 
-            .img-banner {
-                height: 200px;
+            .section {
+                margin: 60px auto;
+                padding: 0 20px;
+            }
+
+            .section-title {
+                font-size: 1.8rem;
+            }
+
+            .accordion-header {
+                font-size: 1.1rem;
+            }
+
+            .accordion-body ul,
+            .accordion-body table {
+                font-size: 0.9rem;
+            }
+        }
+
+        @media (max-width: 480px) {
+            nav {
+                padding: 10px 15px;
+            }
+
+            nav .logo {
+                font-size: 1.2rem;
+            }
+
+            nav ul li {
+                margin-left: 15px;
+            }
+
+            .hero-text h1 {
+                font-size: 1.8rem;
+            }
+
+            .section-title {
+                font-size: 1.6rem;
+            }
+
+            .accordion-header {
+                font-size: 1rem;
+            }
+
+            .accordion-body a.search-button {
+                padding: 4px 8px;
+                font-size: 0.85rem;
+            }
+
+            table th,
+            table td {
+                padding: 8px 10px;
+                font-size: 0.85rem;
+            }
+        }
+
+        /* ======= PRINT STYLES ======= */
+        @media print {
+            nav {
+                display: none;
+            }
+
+            .hero {
+                height: auto;
+                background: none;
+                filter: none;
+            }
+
+            .hero-text {
+                margin-bottom: 20px;
+                background: none;
+                box-shadow: none;
+                color: #000000;
+            }
+
+            .search-button {
+                display: none;
+            }
+
+            .accordion-header::after {
+                content: "";
+            }
+
+            .accordion-body {
+                max-height: none !important;
+                padding: 10px 0;
+            }
+
+            table {
+                width: 100%;
+                border-collapse: collapse;
+            }
+
+            table th,
+            table td {
+                border: 1px solid #dddddd;
+                padding: 8px;
+                text-align: left;
+            }
+
+            table th {
+                background: #f2f2f2;
             }
         }
     </style>
@@ -357,7 +565,7 @@
     <!-- ======= HERO SECTION ======= -->
     <section class="hero fade-in-section" id="hero">
         <div class="hero-text">
-            <h2>日本新幹線旅遊攻略</h2>
+            <h1>日本新幹線旅遊攻略</h1>
             <p>從九州出發，一路通往北海道，體驗日本縱貫的高速鐵路之旅</p>
         </div>
     </section>
@@ -365,8 +573,6 @@
     <!-- ======= SECTION 1: 所有車站 ======= -->
     <div class="section fade-in-section" id="all-stations">
         <h3 class="section-title">1. 日本新幹線全線車站與在地特色</h3>
-        <div class="img-banner" style="background-image: url('images/02.jpg');"></div>
-
         <p>以下整理了日本新幹線主要路線（含迷你新幹線），自南(九州)而北(北海道)的所有車站與在地特色。</p>
 
         <!-- Accordion -->
@@ -377,17 +583,94 @@
                 <div class="accordion-body">
                     <p><strong>營運路段：</strong>鹿兒島中央～博多，串接山陽新幹線於博多站。</p>
                     <ul>
-                        <li><strong>鹿兒島中央站：</strong>眺望櫻島火山、黑豚料理、黑糖燒酎</li>
-                        <li><strong>薩摩川內站：</strong>川內高城溫泉</li>
-                        <li><strong>出水站：</strong>冬季鶴群棲息</li>
-                        <li><strong>新八代站：</strong>八代名產晩白柚</li>
-                        <li><strong>新玉名站：</strong>玉名溫泉、玉名拉麵</li>
-                        <li><strong>熊本站：</strong>熊本城、馬刺し、熊本熊</li>
-                        <li><strong>新大牟田站：</strong>三池煤礦遺跡、大牟田拉麵</li>
-                        <li><strong>筑後船小屋站：</strong>船小屋溫泉、水果盛產</li>
-                        <li><strong>久留米站：</strong>豚骨拉麵、燒鳥、久留米絣</li>
-                        <li><strong>新鳥栖站：</strong>鳥栖 Premium Outlets、足球隊本拠地</li>
-                        <li><strong>博多站：</strong>福岡市中心、明太子、屋台文化</li>
+                        <li>
+                            <strong>鹿兒島中央站：</strong>
+                            眺望櫻島火山、黑豚料理、黑糖燒酎
+                            <a href="https://www.google.com/search?q=鹿兒島中央站" target="_blank" class="search-button"
+                                aria-label="搜尋 鹿兒島中央站">
+                                搜尋
+                            </a>
+                        </li>
+                        <li>
+                            <strong>薩摩川內站：</strong>
+                            川內高城溫泉
+                            <a href="https://www.google.com/search?q=薩摩川內站" target="_blank" class="search-button"
+                                aria-label="搜尋 薩摩川內站">
+                                搜尋
+                            </a>
+                        </li>
+                        <li>
+                            <strong>出水站：</strong>
+                            冬季鶴群棲息
+                            <a href="https://www.google.com/search?q=出水站" target="_blank" class="search-button"
+                                aria-label="搜尋 出水站">
+                                搜尋
+                            </a>
+                        </li>
+                        <li>
+                            <strong>新八代站：</strong>
+                            八代名產晩白柚
+                            <a href="https://www.google.com/search?q=新八代站" target="_blank" class="search-button"
+                                aria-label="搜尋 新八代站">
+                                搜尋
+                            </a>
+                        </li>
+                        <li>
+                            <strong>新玉名站：</strong>
+                            玉名溫泉、玉名拉麵
+                            <a href="https://www.google.com/search?q=新玉名站" target="_blank" class="search-button"
+                                aria-label="搜尋 新玉名站">
+                                搜尋
+                            </a>
+                        </li>
+                        <li>
+                            <strong>熊本站：</strong>
+                            熊本城、馬刺し、熊本熊
+                            <a href="https://www.google.com/search?q=熊本站" target="_blank" class="search-button"
+                                aria-label="搜尋 熊本站">
+                                搜尋
+                            </a>
+                        </li>
+                        <li>
+                            <strong>新大牟田站：</strong>
+                            三池煤礦遺跡、大牟田拉麵
+                            <a href="https://www.google.com/search?q=新大牟田站" target="_blank" class="search-button"
+                                aria-label="搜尋 新大牟田站">
+                                搜尋
+                            </a>
+                        </li>
+                        <li>
+                            <strong>筑後船小屋站：</strong>
+                            船小屋溫泉、水果盛產
+                            <a href="https://www.google.com/search?q=筑後船小屋站" target="_blank" class="search-button"
+                                aria-label="搜尋 筑後船小屋站">
+                                搜尋
+                            </a>
+                        </li>
+                        <li>
+                            <strong>久留米站：</strong>
+                            豚骨拉麵、燒鳥、久留米絣
+                            <a href="https://www.google.com/search?q=久留米站" target="_blank" class="search-button"
+                                aria-label="搜尋 久留米站">
+                                搜尋
+                            </a>
+                        </li>
+                        <li>
+                            <strong>新鳥栖站：</strong>
+                            鳥栖 Premium Outlets、足球隊本拠地
+                            <a href="https://www.google.com/search?q=新鳥栖站" target="_blank" class="search-button"
+                                aria-label="搜尋 新鳥栖站">
+                                搜尋
+                            </a>
+                        </li>
+                        <li>
+                            <strong>博多站：</strong>
+                            福岡市中心、明太子、屋台文化
+                            <a href="https://www.google.com/search?q=博多站" target="_blank" class="search-button"
+                                aria-label="搜尋 博多站">
+                                搜尋
+                            </a>
+                        </li>
                     </ul>
                 </div>
             </div>
@@ -398,24 +681,151 @@
                 <div class="accordion-body">
                     <p><strong>營運路段：</strong>博多～新大阪，全線與東海道新幹線相接。</p>
                     <ul>
-                        <li><strong>博多站：</strong>豚骨拉麵、明太子、商業中心</li>
-                        <li><strong>小倉站：</strong>小倉城、小倉燒咖哩</li>
-                        <li><strong>新下關站：</strong>下關河豚料理、關門海峽</li>
-                        <li><strong>新山口站：</strong>湯田溫泉、瑠璃光寺</li>
-                        <li><strong>德山站：</strong>周南市、瀨戶內海</li>
-                        <li><strong>新岩國站：</strong>錦帶橋、岩國壽司</li>
-                        <li><strong>廣島站：</strong>和平公園、嚴島神社、廣島燒</li>
-                        <li><strong>東廣島站：</strong>西條清酒</li>
-                        <li><strong>三原站：</strong>章魚料理、瀨戶內海</li>
-                        <li><strong>新尾道站：</strong>尾道老街、貓之細道</li>
-                        <li><strong>福山站：</strong>福山城、玫瑰之城</li>
-                        <li><strong>新倉敷站：</strong>倉敷美觀地區</li>
-                        <li><strong>岡山站：</strong>後樂園、岡山城、吉備糰子</li>
-                        <li><strong>相生站：</strong>瀨戶內海沿岸</li>
-                        <li><strong>姬路站：</strong>世界遺產姬路城</li>
-                        <li><strong>西明石站：</strong>明石燒</li>
-                        <li><strong>新神戶站：</strong>神戶牛、六甲山</li>
-                        <li><strong>新大阪站：</strong>大阪美食、關西樞紐</li>
+                        <li>
+                            <strong>博多站：</strong>
+                            豚骨拉麵、明太子、商業中心
+                            <a href="https://www.google.com/search?q=博多+新大阪站 site:https://www.navitime.co.jp/zh-tw"
+                                target="_blank" class="search-button"
+                                aria-label="搜尋 博多 新大阪站 site:https://www.navitime.co.jp/zh-tw">
+                                搜尋
+                            </a>
+                        </li>
+                        <li>
+                            <strong>小倉站：</strong>
+                            小倉城、小倉燒咖哩
+                            <a href="https://www.google.com/search?q=小倉站" target="_blank" class="search-button"
+                                aria-label="搜尋 小倉站">
+                                搜尋
+                            </a>
+                        </li>
+                        <li>
+                            <strong>新下關站：</strong>
+                            下關河豚料理、關門海峽
+                            <a href="https://www.google.com/search?q=新下關站" target="_blank" class="search-button"
+                                aria-label="搜尋 新下關站">
+                                搜尋
+                            </a>
+                        </li>
+                        <li>
+                            <strong>新山口站：</strong>
+                            湯田溫泉、瑠璃光寺
+                            <a href="https://www.google.com/search?q=新山口站" target="_blank" class="search-button"
+                                aria-label="搜尋 新山口站">
+                                搜尋
+                            </a>
+                        </li>
+                        <li>
+                            <strong>德山站：</strong>
+                            周南市、瀨戶內海
+                            <a href="https://www.google.com/search?q=德山站" target="_blank" class="search-button"
+                                aria-label="搜尋 德山站">
+                                搜尋
+                            </a>
+                        </li>
+                        <li>
+                            <strong>新岩國站：</strong>
+                            錦帶橋、岩國壽司
+                            <a href="https://www.google.com/search?q=新岩國站" target="_blank" class="search-button"
+                                aria-label="搜尋 新岩國站">
+                                搜尋
+                            </a>
+                        </li>
+                        <li>
+                            <strong>廣島站：</strong>
+                            和平公園、嚴島神社、廣島燒
+                            <a href="https://www.google.com/search?q=廣島站" target="_blank" class="search-button"
+                                aria-label="搜尋 廣島站">
+                                搜尋
+                            </a>
+                        </li>
+                        <li>
+                            <strong>東廣島站：</strong>
+                            西條清酒
+                            <a href="https://www.google.com/search?q=東廣島站" target="_blank" class="search-button"
+                                aria-label="搜尋 東廣島站">
+                                搜尋
+                            </a>
+                        </li>
+                        <li>
+                            <strong>三原站：</strong>
+                            章魚料理、瀨戶內海
+                            <a href="https://www.google.com/search?q=三原站" target="_blank" class="search-button"
+                                aria-label="搜尋 三原站">
+                                搜尋
+                            </a>
+                        </li>
+                        <li>
+                            <strong>新尾道站：</strong>
+                            尾道老街、貓之細道
+                            <a href="https://www.google.com/search?q=新尾道站" target="_blank" class="search-button"
+                                aria-label="搜尋 新尾道站">
+                                搜尋
+                            </a>
+                        </li>
+                        <li>
+                            <strong>福山站：</strong>
+                            福山城、玫瑰之城
+                            <a href="https://www.google.com/search?q=福山站" target="_blank" class="search-button"
+                                aria-label="搜尋 福山站">
+                                搜尋
+                            </a>
+                        </li>
+                        <li>
+                            <strong>新倉敷站：</strong>
+                            倉敷美觀地區
+                            <a href="https://www.google.com/search?q=新倉敷站" target="_blank" class="search-button"
+                                aria-label="搜尋 新倉敷站">
+                                搜尋
+                            </a>
+                        </li>
+                        <li>
+                            <strong>岡山站：</strong>
+                            後樂園、岡山城、吉備糰子
+                            <a href="https://www.google.com/search?q=岡山站" target="_blank" class="search-button"
+                                aria-label="搜尋 岡山站">
+                                搜尋
+                            </a>
+                        </li>
+                        <li>
+                            <strong>相生站：</strong>
+                            瀨戶內海沿岸
+                            <a href="https://www.google.com/search?q=相生站" target="_blank" class="search-button"
+                                aria-label="搜尋 相生站">
+                                搜尋
+                            </a>
+                        </li>
+                        <li>
+                            <strong>姬路站：</strong>
+                            世界遺產姬路城
+                            <a href="https://www.google.com/search?q=姬路站" target="_blank" class="search-button"
+                                aria-label="搜尋 姬路站">
+                                搜尋
+                            </a>
+                        </li>
+                        <li>
+                            <strong>西明石站：</strong>
+                            明石燒
+                            <a href="https://www.google.com/search?q=西明石站" target="_blank" class="search-button"
+                                aria-label="搜尋 西明石站">
+                                搜尋
+                            </a>
+                        </li>
+                        <li>
+                            <strong>新神戶站：</strong>
+                            神戶牛、六甲山
+                            <a href="https://www.google.com/search?q=新神戶站" target="_blank" class="search-button"
+                                aria-label="搜尋 新神戶站">
+                                搜尋
+                            </a>
+                        </li>
+                        <li>
+                            <strong>新大阪站：</strong>
+                            大阪美食、關西樞紐
+                            <a href="https://www.google.com/search?q=新大阪站" target="_blank" class="search-button"
+                                aria-label="搜尋 新大阪站">
+                                搜尋
+                            </a>
+                        </li>
                     </ul>
                 </div>
             </div>
@@ -426,197 +836,187 @@
                 <div class="accordion-body">
                     <p><strong>營運路段：</strong>新大阪～東京，串起關西～中部～關東；日本最繁忙。</p>
                     <ul>
-                        <li><strong>新大阪站：</strong>大阪美食、交通樞紐</li>
-                        <li><strong>京都站：</strong>古都、清水寺、金閣寺、和菓子</li>
-                        <li><strong>米原站：</strong>琵琶湖、彥根城</li>
-                        <li><strong>岐阜羽島站：</strong>長良川鵜飼</li>
-                        <li><strong>名古屋站：</strong>名古屋城、味噌豬排、鰻魚飯</li>
-                        <li><strong>三河安城站：</strong>工業區</li>
-                        <li><strong>豊橋站：</strong>竹輪、手筒煙火</li>
-                        <li><strong>濱松站：</strong>鰻魚料理、濱名湖</li>
-                        <li><strong>掛川站：</strong>掛川城、茶葉產地</li>
-                        <li><strong>靜岡站：</strong>富士山景、綠茶、芥末</li>
-                        <li><strong>新富士站：</strong>富士市、工業區</li>
-                        <li><strong>三島站：</strong>伊豆玄關、鰻魚</li>
-                        <li><strong>熱海站：</strong>溫泉</li>
-                        <li><strong>小田原站：</strong>小田原城、箱根玄關</li>
-                        <li><strong>新橫濱站：</strong>橫濱拉麵博物館、港未來</li>
-                        <li><strong>品川站：</strong>東京南部商務區</li>
-                        <li><strong>東京站：</strong>丸之內赤磚站舍、首都核心</li>
-                    </ul>
-                </div>
-            </div>
-
-            <!-- 東北新幹線 -->
-            <div class="accordion-item">
-                <div class="accordion-header">東北新幹線（東京 ⇄ 新青森）</div>
-                <div class="accordion-body">
-                    <p><strong>營運路段：</strong>東京～新青森，可再往北海道新幹線。</p>
-                    <ul>
-                        <li><strong>上野站：</strong>上野公園、阿美橫町</li>
-                        <li><strong>大宮站：</strong>鐵道博物館、盆栽村</li>
-                        <li><strong>宇都宮站：</strong>餃子之城、日光玄關</li>
-                        <li><strong>郡山站：</strong>近猪苗代湖</li>
-                        <li><strong>福島站：</strong>桃子產地、飯坂溫泉</li>
-                        <li><strong>白石藏王站：</strong>藏王樹冰、狐狸村</li>
-                        <li><strong>仙台站：</strong>東北最大城，牛舌、ずんだ餅</li>
-                        <li><strong>古川站：</strong>大崎市、溫泉</li>
-                        <li><strong>栗駒高原站：</strong>栗駒山</li>
-                        <li><strong>一之關站：</strong>猊鼻溪、嚴美溪</li>
-                        <li><strong>水澤江刺站：</strong>奧州市、藤原之里</li>
-                        <li><strong>北上站：</strong>展勝地櫻花</li>
-                        <li><strong>新花卷站：</strong>宮澤賢治故鄉</li>
-                        <li><strong>盛岡站：</strong>冷麵、じゃじゃ麵、わんこそば</li>
-                        <li><strong>岩手沼宮內站：</strong>高原農業</li>
-                        <li><strong>二戶站：</strong>漆器、馬肉料理</li>
-                        <li><strong>八戶站：</strong>太平洋漁港</li>
-                        <li><strong>七戶十和田站：</strong>十和田湖</li>
-                        <li><strong>新青森站：</strong>青森睡魔祭、蘋果</li>
-                    </ul>
-                </div>
-            </div>
-
-            <!-- 北海道新幹線 -->
-            <div class="accordion-item">
-                <div class="accordion-header">北海道新幹線（新青森 ⇄ 新函館北斗）</div>
-                <div class="accordion-body">
-                    <p><strong>營運路段：</strong>目前為新青森～新函館北斗，將延伸至札幌。</p>
-                    <ul>
-                        <li><strong>奧津輕今別站：</strong>津輕海峽、龍飛崎</li>
-                        <li><strong>木古內站：</strong>松前城、海鮮</li>
-                        <li><strong>新函館北斗站：</strong>函館夜景、海鮮拉麵</li>
-                    </ul>
-                </div>
-            </div>
-
-            <!-- 上越、北陸、山形、秋田新幹線簡要 -->
-            <div class="accordion-item">
-                <div class="accordion-header">其他線：上越、北陸、山形、秋田新幹線</div>
-                <div class="accordion-body">
-                    <p>
-                        <strong>上越新幹線（東京 ⇄ 新潟）：</strong>東京、大宮、熊谷、高崎、越後湯澤、長岡、燕三條、新潟<br>
-                        <strong>北陸新幹線（東京 ⇄ 金澤）：</strong>東京、大宮、高崎、輕井澤、長野、富山、金澤<br>
-                        <strong>山形新幹線（福島 ⇄ 新庄）：</strong>福島、米澤、山形、天童、新庄 (迷你新幹線)<br>
-                        <strong>秋田新幹線（盛岡 ⇄ 秋田）：</strong>盛岡、角館、大曲、秋田 (迷你新幹線)
-                    </p>
-                </div>
-            </div>
-        </div>
-    </div>
-
-    <!-- ======= SECTION 2: 大城市距離與時間 ======= -->
-    <div class="section fade-in-section" id="major-distance">
-        <h3 class="section-title">2. 只停留主要大城市：距離與時間</h3>
-        <div class="img-banner" style="background-image: url('images/03.jpg');"></div>
-
-        <p>以下列出了「只停主要都市」時，各路線區間的營業距離與最快車種所需時間。實際會因班次、停車站數量而略有不同。</p>
-
-        <!-- Accordion -->
-        <div class="accordion">
-            <!-- 九州新幹線(大城市) -->
-            <div class="accordion-item">
-                <div class="accordion-header">九州新幹線</div>
-                <div class="accordion-body">
-                    <table>
+                        <li>
+                            <strong>新大阪站：</strong>
+                            大阪美食、交通樞紐
+                            <a href="https://www.google.com/search?q=新大阪站+京都站 site:https://www.navitime.co.jp/zh-tw"
+                                target="_blank" class="search-button"
+                                aria-label="搜尋 新大阪站 京都站 site:https://www.navitime.co.jp/zh-tw">
+                                搜尋
+                            </a>
+                        </li>
+                        <li>
+                            <strong>京都站：</strong>
+                            古都、清水寺、金閣寺、和菓子
+                            <a href="https://www.google.com/search?q=京都站+名古屋站 site:https://www.navitime.co.jp/zh-tw"
+                                target="_blank" class="search-button"
+                                aria-label="搜尋 京都站 名古屋站 site:https://www.navitime.co.jp/zh-tw">
+                                搜尋
+                            </a>
+                        </li>
+                        <li>
+                            <strong>米原站：</strong>
+                            琵琶湖、彥根城
+                            <a href="https://www.google.com/search?q=米原站+岐阜羽島站 site:https://www.navitime.co.jp/zh-tw"
+                                target="_blank" class="search-button"
+                                aria-label="搜尋 米原站 岐阜羽島站 site:https://www.navitime.co.jp/zh-tw">
+                                搜尋
+                            </a>
+                        </li>
+                        <li>
+                            <strong>岐阜羽島站：</strong>
+                            長良川鵜飼
+                            <a href="https://www.google.com/search?q=岐阜羽島站+名古屋站 site:https://www.navitime.co.jp/zh-tw"
+                                target="_blank" class="search-button"
+                                aria-label="搜尋 岐阜羽島站 名古屋站 site:https://www.navitime.co.jp/zh-tw">
+                                搜尋
+                            </a>
+                        </li>
+                        <li>
+                            <strong>名古屋站：</strong>
+                            名古屋城、味噌豬排、鰻魚飯
+                            <a href="https://www.google.com/search?q=名古屋站+三河安城站 site:https://www.navitime.co.jp/zh-tw"
+                                target="_blank" class="search-button"
+                                aria-label="搜尋 名古屋站 三河安城站 site:https://www.navitime.co.jp/zh-tw">
+                                搜尋
+                            </a>
+                        </li>
+                        <li>
+                            <strong>三河安城站：</strong>
+                            工業區
+                            <a href="https://www.google.com/search?q=三河安城站+豊橋站 site:https://www.navitime.co.jp/zh-tw"
+                                target="_blank" class="search-button"
+                                aria-label="搜尋 三河安城站 豊橋站 site:https://www.navitime.co.jp/zh-tw">
+                                搜尋
+                            </a>
+                        </li>
+                        <li>
+                            <strong>豊橋站：</strong>
+                            竹輪、手筒煙火
+                            <a href="https://www.google.com/search?q=豊橋站+濱松站 site:https://www.navitime.co.jp/zh-tw"
+                                target="_blank" class="search-button"
+                                aria-label="搜尋 豊橋站 濱松站 site:https://www.navitime.co.jp/zh-tw">
+                                搜尋
+                            </a>
+                        </li>
+                        <li>
+                            <strong>濱松站：</strong>
+                            鰻魚料理、濱名湖
+                            <a href="https://www.google.com/search?q=濱松站+掛川站 site:https://www.navitime.co.jp/zh-tw"
+                                target="_blank" class="search-button"
+                                aria-label="搜尋 濱松站 掛川站 site:https://www.navitime.co.jp/zh-tw">
+                                搜尋
+                            </a>
+                        </li>
                         <tr>
-                            <th>區間</th>
-                            <th>距離(約)</th>
-                            <th>最短時間(約)</th>
-                        </tr>
-                        <tr>
-                            <td>鹿兒島中央 → 熊本</td>
-                            <td>117 km</td>
-                            <td>約35 分 (Mizuho/Sakura)</td>
-                        </tr>
-                        <tr>
-                            <td>熊本 → 博多</td>
-                            <td>140 km</td>
+                            <td>掛川站：</td>
+                            <td>掛川城、茶葉產地</td>
                             <td>約33～35 分</td>
+                            <td>
+                                <a href="https://www.google.com/search?q=掛川站+靜岡站 site:https://www.navitime.co.jp/zh-tw"
+                                    target="_blank" class="search-button"
+                                    aria-label="搜尋 掛川站 靜岡站 site:https://www.navitime.co.jp/zh-tw">
+                                    搜尋
+                                </a>
+                            </td>
                         </tr>
                         <tr>
-                            <td><strong>鹿兒島中央 → 博多(全程)</strong></td>
-                            <td>257 km</td>
-                            <td>約1 小時 10～20 分</td>
-                        </tr>
-                    </table>
-                </div>
-            </div>
-
-            <!-- 山陽新幹線(大城市) -->
-            <div class="accordion-item">
-                <div class="accordion-header">山陽新幹線</div>
-                <div class="accordion-body">
-                    <table>
-                        <tr>
-                            <th>區間</th>
-                            <th>距離(約)</th>
-                            <th>最短時間(約)</th>
-                        </tr>
-                        <tr>
-                            <td>博多 → 廣島</td>
-                            <td>272 km</td>
-                            <td>約1 小時 02 分</td>
-                        </tr>
-                        <tr>
-                            <td>廣島 → 岡山</td>
-                            <td>120 km</td>
-                            <td>約34～40 分</td>
-                        </tr>
-                        <tr>
-                            <td>岡山 → 新神戶</td>
-                            <td>129 km</td>
-                            <td>約33～35 分</td>
-                        </tr>
-                        <tr>
-                            <td>新神戶 → 新大阪</td>
-                            <td>33 km</td>
-                            <td>約13～15 分</td>
-                        </tr>
-                        <tr>
-                            <td><strong>博多 → 新大阪(全程)</strong></td>
-                            <td>554 km</td>
-                            <td>約2 小時 20～30 分</td>
-                        </tr>
-                    </table>
-                </div>
-            </div>
-
-            <!-- 東海道新幹線(大城市) -->
-            <div class="accordion-item">
-                <div class="accordion-header">東海道新幹線</div>
-                <div class="accordion-body">
-                    <table>
-                        <tr>
-                            <th>區間</th>
-                            <th>距離(約)</th>
-                            <th>最短時間(約)</th>
-                        </tr>
-                        <tr>
-                            <td>新大阪 → 京都</td>
-                            <td>39 km</td>
-                            <td>約14～15 分 (Nozomi)</td>
-                        </tr>
-                        <tr>
-                            <td>京都 → 名古屋</td>
-                            <td>134 km</td>
-                            <td>約34～38 分</td>
-                        </tr>
-                        <tr>
-                            <td>名古屋 → 新橫濱</td>
-                            <td>316 km</td>
-                            <td>約73～80 分</td>
-                        </tr>
-                        <tr>
-                            <td>新橫濱 → 東京</td>
-                            <td>26 km</td>
+                            <td>靜岡站：</td>
+                            <td>富士山景、綠茶、芥末</td>
                             <td>約18～20 分</td>
+                            <td>
+                                <a href="https://www.google.com/search?q=靜岡站+新富士站 site:https://www.navitime.co.jp/zh-tw"
+                                    target="_blank" class="search-button"
+                                    aria-label="搜尋 靜岡站 新富士站 site:https://www.navitime.co.jp/zh-tw">
+                                    搜尋
+                                </a>
+                            </td>
                         </tr>
                         <tr>
-                            <td><strong>新大阪 → 東京(全程)</strong></td>
-                            <td>515 km</td>
-                            <td>約2 小時 30～40 分</td>
+                            <td>新富士站：</td>
+                            <td>富士市、工業區</td>
+                            <td>約40 分</td>
+                            <td>
+                                <a href="https://www.google.com/search?q=新富士站+三島站 site:https://www.navitime.co.jp/zh-tw"
+                                    target="_blank" class="search-button"
+                                    aria-label="搜尋 新富士站 三島站 site:https://www.navitime.co.jp/zh-tw">
+                                    搜尋
+                                </a>
+                            </td>
                         </tr>
-                    </table>
+                        <tr>
+                            <td>三島站：</td>
+                            <td>伊豆玄關、鰻魚</td>
+                            <td>約40 分</td>
+                            <td>
+                                <a href="https://www.google.com/search?q=三島站+熱海站 site:https://www.navitime.co.jp/zh-tw"
+                                    target="_blank" class="search-button"
+                                    aria-label="搜尋 三島站 熱海站 site:https://www.navitime.co.jp/zh-tw">
+                                    搜尋
+                                </a>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>熱海站：</td>
+                            <td>溫泉</td>
+                            <td>約18～20 分</td>
+                            <td>
+                                <a href="https://www.google.com/search?q=熱海站+小田原站 site:https://www.navitime.co.jp/zh-tw"
+                                    target="_blank" class="search-button"
+                                    aria-label="搜尋 熱海站 小田原站 site:https://www.navitime.co.jp/zh-tw">
+                                    搜尋
+                                </a>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>小田原站：</td>
+                            <td>小田原城、箱根玄關</td>
+                            <td>約18～20 分</td>
+                            <td>
+                                <a href="https://www.google.com/search?q=小田原站+新橫濱站 site:https://www.navitime.co.jp/zh-tw"
+                                    target="_blank" class="search-button"
+                                    aria-label="搜尋 小田原站 新橫濱站 site:https://www.navitime.co.jp/zh-tw">
+                                    搜尋
+                                </a>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>新橫濱站：</td>
+                            <td>橫濱拉麵博物館、港未來</td>
+                            <td>約18～20 分</td>
+                            <td>
+                                <a href="https://www.google.com/search?q=新橫濱站+品川站 site:https://www.navitime.co.jp/zh-tw"
+                                    target="_blank" class="search-button"
+                                    aria-label="搜尋 新橫濱站 品川站 site:https://www.navitime.co.jp/zh-tw">
+                                    搜尋
+                                </a>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>品川站：</td>
+                            <td>東京南部商務區</td>
+                            <td>約18～20 分</td>
+                            <td>
+                                <a href="https://www.google.com/search?q=品川站+東京站 site:https://www.navitime.co.jp/zh-tw"
+                                    target="_blank" class="search-button"
+                                    aria-label="搜尋 品川站 東京站 site:https://www.navitime.co.jp/zh-tw">
+                                    搜尋
+                                </a>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>東京站：</td>
+                            <td>丸之內赤磚站舍、首都核心</td>
+                            <td>約18～20 分</td>
+                            <td>
+                                <a href="https://www.google.com/search?q=東京站 site:https://www.navitime.co.jp/zh-tw"
+                                    target="_blank" class="search-button"
+                                    aria-label="搜尋 東京站 site:https://www.navitime.co.jp/zh-tw">
+                                    搜尋
+                                </a>
+                            </td>
+                        </tr>
+                        </table>
                 </div>
             </div>
 
@@ -629,31 +1029,67 @@
                             <th>區間</th>
                             <th>距離(約)</th>
                             <th>最短時間(約)</th>
+                            <th>搜尋</th>
                         </tr>
                         <tr>
                             <td>東京 → 大宮</td>
                             <td>30 km</td>
                             <td>約25～30 分 (Hayabusa)</td>
+                            <td>
+                                <a href="https://www.google.com/search?q=東京站+大宮站 site:https://www.navitime.co.jp/zh-tw"
+                                    target="_blank" class="search-button"
+                                    aria-label="搜尋 東京站 大宮站 site:https://www.navitime.co.jp/zh-tw">
+                                    搜尋
+                                </a>
+                            </td>
                         </tr>
                         <tr>
                             <td>大宮 → 仙台</td>
                             <td>322 km</td>
                             <td>約1 小時 05 分</td>
+                            <td>
+                                <a href="https://www.google.com/search?q=大宮站+仙台站 site:https://www.navitime.co.jp/zh-tw"
+                                    target="_blank" class="search-button"
+                                    aria-label="搜尋 大宮站 仙台站 site:https://www.navitime.co.jp/zh-tw">
+                                    搜尋
+                                </a>
+                            </td>
                         </tr>
                         <tr>
                             <td>仙台 → 盛岡</td>
                             <td>184 km</td>
                             <td>約35～40 分</td>
+                            <td>
+                                <a href="https://www.google.com/search?q=仙台站+盛岡站 site:https://www.navitime.co.jp/zh-tw"
+                                    target="_blank" class="search-button"
+                                    aria-label="搜尋 仙台站 盛岡站 site:https://www.navitime.co.jp/zh-tw">
+                                    搜尋
+                                </a>
+                            </td>
                         </tr>
                         <tr>
                             <td>盛岡 → 新青森</td>
                             <td>140 km</td>
                             <td>約40 分</td>
+                            <td>
+                                <a href="https://www.google.com/search?q=盛岡站+新青森站 site:https://www.navitime.co.jp/zh-tw"
+                                    target="_blank" class="search-button"
+                                    aria-label="搜尋 盛岡站 新青森站 site:https://www.navitime.co.jp/zh-tw">
+                                    搜尋
+                                </a>
+                            </td>
                         </tr>
                         <tr>
                             <td><strong>東京 → 新青森</strong></td>
                             <td>675 km</td>
                             <td>約3 小時</td>
+                            <td>
+                                <a href="https://www.google.com/search?q=東京站+新青森站 site:https://www.navitime.co.jp/zh-tw"
+                                    target="_blank" class="search-button"
+                                    aria-label="搜尋 東京站 新青森站 site:https://www.navitime.co.jp/zh-tw">
+                                    搜尋
+                                </a>
+                            </td>
                         </tr>
                     </table>
                 </div>
@@ -668,12 +1104,358 @@
                             <th>區間</th>
                             <th>距離(約)</th>
                             <th>最短時間(約)</th>
+                            <th>搜尋</th>
                         </tr>
                         <tr>
                             <td>新青森 → 新函館北斗</td>
                             <td>149 km</td>
                             <td>約1 小時</td>
+                            <td>
+                                <a href="https://www.google.com/search?q=新青森站+新函館北斗站 site:https://www.navitime.co.jp/zh-tw"
+                                    target="_blank" class="search-button"
+                                    aria-label="搜尋 新青森站 新函館北斗站 site:https://www.navitime.co.jp/zh-tw">
+                                    搜尋
+                                </a>
+                            </td>
                         </tr>
+                        <tr>
+                            <td>新函館北斗 → 札幌</td>
+                            <td>xxx km</td>
+                            <td>約x 小時</td>
+                            <td>
+                                <a href="https://www.google.com/search?q=新函館北斗站+札幌站 site:https://www.navitime.co.jp/zh-tw"
+                                    target="_blank" class="search-button"
+                                    aria-label="搜尋 新函館北斗站 札幌站 site:https://www.navitime.co.jp/zh-tw">
+                                    搜尋
+                                </a>
+                            </td>
+                        </tr>
+                        <!-- 可以根據實際情況添加更多區間 -->
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- ======= SECTION 2: 大城市距離與時間 ======= -->
+    <div class="section fade-in-section" id="major-distance">
+        <h3 class="section-title">2. 只停留主要大城市：距離與時間</h3>
+        <p>以下列出了「只停主要都市」時，各路線區間的營業距離與最快車種所需時間。實際會因班次、停車站數量而略有不同。</p>
+
+        <!-- Accordion -->
+        <div class="accordion">
+            <!-- 九州新幹線(大城市) -->
+            <div class="accordion-item">
+                <div class="accordion-header">九州新幹線</div>
+                <div class="accordion-body">
+                    <table>
+                        <tr>
+                            <th>區間</th>
+                            <th>距離(約)</th>
+                            <th>最短時間(約)</th>
+                            <th>搜尋</th>
+                        </tr>
+                        <tr>
+                            <td>鹿兒島中央 → 熊本</td>
+                            <td>117 km</td>
+                            <td>約35 分 (Mizuho/Sakura)</td>
+                            <td>
+                                <a href="https://www.google.com/search?q=鹿兒島中央+熊本 site:https://www.navitime.co.jp/zh-tw"
+                                    target="_blank" class="search-button"
+                                    aria-label="搜尋 鹿兒島中央 熊本 site:https://www.navitime.co.jp/zh-tw">
+                                    搜尋
+                                </a>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>熊本 → 博多</td>
+                            <td>140 km</td>
+                            <td>約33～35 分</td>
+                            <td>
+                                <a href="https://www.google.com/search?q=熊本+博多 site:https://www.navitime.co.jp/zh-tw"
+                                    target="_blank" class="search-button"
+                                    aria-label="搜尋 熊本 博多 site:https://www.navitime.co.jp/zh-tw">
+                                    搜尋
+                                </a>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td><strong>鹿兒島中央 → 博多(全程)</strong></td>
+                            <td>257 km</td>
+                            <td>約1 小時 10～20 分</td>
+                            <td>
+                                <a href="https://www.google.com/search?q=鹿兒島中央+博多 site:https://www.navitime.co.jp/zh-tw"
+                                    target="_blank" class="search-button"
+                                    aria-label="搜尋 鹿兒島中央 博多 site:https://www.navitime.co.jp/zh-tw">
+                                    搜尋
+                                </a>
+                            </td>
+                        </tr>
+                    </table>
+                </div>
+            </div>
+
+            <!-- 山陽新幹線(大城市) -->
+            <div class="accordion-item">
+                <div class="accordion-header">山陽新幹線</div>
+                <div class="accordion-body">
+                    <table>
+                        <tr>
+                            <th>區間</th>
+                            <th>距離(約)</th>
+                            <th>最短時間(約)</th>
+                            <th>搜尋</th>
+                        </tr>
+                        <tr>
+                            <td>博多 → 廣島</td>
+                            <td>272 km</td>
+                            <td>約1 小時 02 分</td>
+                            <td>
+                                <a href="https://www.google.com/search?q=博多+廣島 site:https://www.navitime.co.jp/zh-tw"
+                                    target="_blank" class="search-button"
+                                    aria-label="搜尋 博多 廣島 site:https://www.navitime.co.jp/zh-tw">
+                                    搜尋
+                                </a>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>廣島 → 岡山</td>
+                            <td>120 km</td>
+                            <td>約34～40 分</td>
+                            <td>
+                                <a href="https://www.google.com/search?q=廣島+岡山 site:https://www.navitime.co.jp/zh-tw"
+                                    target="_blank" class="search-button"
+                                    aria-label="搜尋 廣島 岡山 site:https://www.navitime.co.jp/zh-tw">
+                                    搜尋
+                                </a>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>岡山 → 新神戶</td>
+                            <td>129 km</td>
+                            <td>約33～35 分</td>
+                            <td>
+                                <a href="https://www.google.com/search?q=岡山+新神戶 site:https://www.navitime.co.jp/zh-tw"
+                                    target="_blank" class="search-button"
+                                    aria-label="搜尋 岡山 新神戶 site:https://www.navitime.co.jp/zh-tw">
+                                    搜尋
+                                </a>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>新神戶 → 新大阪</td>
+                            <td>33 km</td>
+                            <td>約13～15 分</td>
+                            <td>
+                                <a href="https://www.google.com/search?q=新神戶+新大阪 site:https://www.navitime.co.jp/zh-tw"
+                                    target="_blank" class="search-button"
+                                    aria-label="搜尋 新神戶 新大阪 site:https://www.navitime.co.jp/zh-tw">
+                                    搜尋
+                                </a>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td><strong>博多 → 新大阪(全程)</strong></td>
+                            <td>554 km</td>
+                            <td>約2 小時 20～30 分</td>
+                            <td>
+                                <a href="https://www.google.com/search?q=博多+新大阪 site:https://www.navitime.co.jp/zh-tw"
+                                    target="_blank" class="search-button"
+                                    aria-label="搜尋 博多 新大阪 site:https://www.navitime.co.jp/zh-tw">
+                                    搜尋
+                                </a>
+                            </td>
+                        </tr>
+                    </table>
+                </div>
+            </div>
+
+            <!-- 東海道新幹線(大城市) -->
+            <div class="accordion-item">
+                <div class="accordion-header">東海道新幹線</div>
+                <div class="accordion-body">
+                    <table>
+                        <tr>
+                            <th>區間</th>
+                            <th>距離(約)</th>
+                            <th>最短時間(約)</th>
+                            <th>搜尋</th>
+                        </tr>
+                        <tr>
+                            <td>新大阪 → 京都</td>
+                            <td>39 km</td>
+                            <td>約14～15 分 (Nozomi)</td>
+                            <td>
+                                <a href="https://www.google.com/search?q=新大阪站+京都站 site:https://www.navitime.co.jp/zh-tw"
+                                    target="_blank" class="search-button"
+                                    aria-label="搜尋 新大阪站 京都站 site:https://www.navitime.co.jp/zh-tw">
+                                    搜尋
+                                </a>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>京都 → 名古屋</td>
+                            <td>134 km</td>
+                            <td>約34～38 分</td>
+                            <td>
+                                <a href="https://www.google.com/search?q=京都站+名古屋站 site:https://www.navitime.co.jp/zh-tw"
+                                    target="_blank" class="search-button"
+                                    aria-label="搜尋 京都站 名古屋站 site:https://www.navitime.co.jp/zh-tw">
+                                    搜尋
+                                </a>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>名古屋 → 新橫濱</td>
+                            <td>316 km</td>
+                            <td>約73～80 分</td>
+                            <td>
+                                <a href="https://www.google.com/search?q=名古屋站+新橫濱站 site:https://www.navitime.co.jp/zh-tw"
+                                    target="_blank" class="search-button"
+                                    aria-label="搜尋 名古屋站 新橫濱站 site:https://www.navitime.co.jp/zh-tw">
+                                    搜尋
+                                </a>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>新橫濱 → 東京</td>
+                            <td>26 km</td>
+                            <td>約18～20 分</td>
+                            <td>
+                                <a href="https://www.google.com/search?q=新橫濱站+東京站 site:https://www.navitime.co.jp/zh-tw"
+                                    target="_blank" class="search-button"
+                                    aria-label="搜尋 新橫濱站 東京站 site:https://www.navitime.co.jp/zh-tw">
+                                    搜尋
+                                </a>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td><strong>新大阪 → 東京(全程)</strong></td>
+                            <td>515 km</td>
+                            <td>約2 小時 30～40 分</td>
+                            <td>
+                                <a href="https://www.google.com/search?q=新大阪站+東京站 site:https://www.navitime.co.jp/zh-tw"
+                                    target="_blank" class="search-button"
+                                    aria-label="搜尋 新大阪站 東京站 site:https://www.navitime.co.jp/zh-tw">
+                                    搜尋
+                                </a>
+                            </td>
+                        </tr>
+                    </table>
+                </div>
+            </div>
+
+            <!-- 東北新幹線(大城市) -->
+            <div class="accordion-item">
+                <div class="accordion-header">東北新幹線</div>
+                <div class="accordion-body">
+                    <table>
+                        <tr>
+                            <th>區間</th>
+                            <th>距離(約)</th>
+                            <th>最短時間(約)</th>
+                            <th>搜尋</th>
+                        </tr>
+                        <tr>
+                            <td>東京 → 大宮</td>
+                            <td>30 km</td>
+                            <td>約25～30 分 (Hayabusa)</td>
+                            <td>
+                                <a href="https://www.google.com/search?q=東京站+大宮站 site:https://www.navitime.co.jp/zh-tw"
+                                    target="_blank" class="search-button"
+                                    aria-label="搜尋 東京站 大宮站 site:https://www.navitime.co.jp/zh-tw">
+                                    搜尋
+                                </a>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>大宮 → 仙台</td>
+                            <td>322 km</td>
+                            <td>約1 小時 05 分</td>
+                            <td>
+                                <a href="https://www.google.com/search?q=大宮站+仙台站 site:https://www.navitime.co.jp/zh-tw"
+                                    target="_blank" class="search-button"
+                                    aria-label="搜尋 大宮站 仙台站 site:https://www.navitime.co.jp/zh-tw">
+                                    搜尋
+                                </a>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>仙台 → 盛岡</td>
+                            <td>184 km</td>
+                            <td>約35～40 分</td>
+                            <td>
+                                <a href="https://www.google.com/search?q=仙台站+盛岡站 site:https://www.navitime.co.jp/zh-tw"
+                                    target="_blank" class="search-button"
+                                    aria-label="搜尋 仙台站 盛岡站 site:https://www.navitime.co.jp/zh-tw">
+                                    搜尋
+                                </a>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>盛岡 → 新青森</td>
+                            <td>140 km</td>
+                            <td>約40 分</td>
+                            <td>
+                                <a href="https://www.google.com/search?q=盛岡站+新青森站 site:https://www.navitime.co.jp/zh-tw"
+                                    target="_blank" class="search-button"
+                                    aria-label="搜尋 盛岡站 新青森站 site:https://www.navitime.co.jp/zh-tw">
+                                    搜尋
+                                </a>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td><strong>東京 → 新青森</strong></td>
+                            <td>675 km</td>
+                            <td>約3 小時</td>
+                            <td>
+                                <a href="https://www.google.com/search?q=東京站+新青森站 site:https://www.navitime.co.jp/zh-tw"
+                                    target="_blank" class="search-button"
+                                    aria-label="搜尋 東京站 新青森站 site:https://www.navitime.co.jp/zh-tw">
+                                    搜尋
+                                </a>
+                            </td>
+                        </tr>
+                    </table>
+                </div>
+            </div>
+
+            <!-- 北海道新幹線(大城市) -->
+            <div class="accordion-item">
+                <div class="accordion-header">北海道新幹線</div>
+                <div class="accordion-body">
+                    <table>
+                        <tr>
+                            <th>區間</th>
+                            <th>距離(約)</th>
+                            <th>最短時間(約)</th>
+                            <th>搜尋</th>
+                        </tr>
+                        <tr>
+                            <td>新青森 → 新函館北斗</td>
+                            <td>149 km</td>
+                            <td>約1 小時</td>
+                            <td>
+                                <a href="https://www.google.com/search?q=新青森站+新函館北斗站 site:https://www.navitime.co.jp/zh-tw"
+                                    target="_blank" class="search-button"
+                                    aria-label="搜尋 新青森站 新函館北斗站 site:https://www.navitime.co.jp/zh-tw">
+                                    搜尋
+                                </a>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>新函館北斗 → 札幌</td>
+                            <td>xxx km</td>
+                            <td>約x 小時</td>
+                            <td>
+                                <a href="https://www.google.com/search?q=新函館北斗站+札幌站 site:https://www.navitime.co.jp/zh-tw"
+                                    target="_blank" class="search-button"
+                                    aria-label="搜尋 新函館北斗站 札幌站 site:https://www.navitime.co.jp/zh-tw">
+                                    搜尋
+                                </a>
+                            </td>
+                        </tr>
+                        <!-- 可以根據實際情況添加更多區間 -->
                     </table>
                 </div>
             </div>
@@ -683,17 +1465,47 @@
     <!-- ======= SECTION 3: 範例路線 ======= -->
     <div class="section fade-in-section" id="example-route">
         <h3 class="section-title">3. 綜合路線示例：鹿兒島中央 → 新函館北斗</h3>
-        <div class="img-banner" style="background-image: url('images/04.jpg');"></div>
-
         <p>若您想從日本最南端的鹿兒島中央，一路前往北海道的新函館北斗，僅在主要大城市換乘並搭乘最快車種，理想情況下約 10 小時出頭即可達成：</p>
         <ul>
-            <li>鹿兒島中央 → 博多：約 1 小時 10～20 分</li>
-            <li>博多 → 新大阪：約 2 小時 20～30 分</li>
-            <li>新大阪 → 東京：約 2 小時 30～40 分</li>
-            <li>東京 → 新青森：約 3 小時</li>
-            <li>新青森 → 新函館北斗：約 1 小時</li>
+            <li>
+                鹿兒島中央 → 博多：約 1 小時 10～20 分
+                <a href="https://www.google.com/search?q=鹿兒島中央站+博多站 site:https://www.navitime.co.jp/zh-tw"
+                    target="_blank" class="search-button"
+                    aria-label="搜尋 鹿兒島中央站 博多站 site:https://www.navitime.co.jp/zh-tw">
+                    搜尋
+                </a>
+            </li>
+            <li>
+                博多 → 新大阪：約 2 小時 20～30 分
+                <a href="https://www.google.com/search?q=博多站+新大阪站 site:https://www.navitime.co.jp/zh-tw" target="_blank"
+                    class="search-button" aria-label="搜尋 博多站 新大阪站 site:https://www.navitime.co.jp/zh-tw">
+                    搜尋
+                </a>
+            </li>
+            <li>
+                新大阪 → 東京：約 2 小時 30～40 分
+                <a href="https://www.google.com/search?q=新大阪站+東京站 site:https://www.navitime.co.jp/zh-tw" target="_blank"
+                    class="search-button" aria-label="搜尋 新大阪站 東京站 site:https://www.navitime.co.jp/zh-tw">
+                    搜尋
+                </a>
+            </li>
+            <li>
+                東京 → 新青森：約 3 小時
+                <a href="https://www.google.com/search?q=東京站+新青森站 site:https://www.navitime.co.jp/zh-tw" target="_blank"
+                    class="search-button" aria-label="搜尋 東京站 新青森站 site:https://www.navitime.co.jp/zh-tw">
+                    搜尋
+                </a>
+            </li>
+            <li>
+                新青森 → 新函館北斗：約 1 小時
+                <a href="https://www.google.com/search?q=新青森站+新函館北斗站 site:https://www.navitime.co.jp/zh-tw"
+                    target="_blank" class="search-button"
+                    aria-label="搜尋 新青森站 新函館北斗站 site:https://www.navitime.co.jp/zh-tw">
+                    搜尋
+                </a>
+            </li>
         </ul>
-        <p style="margin-top: 10px; color: #555555;">
+        <p style="margin-top: 15px; color: #555555;">
             * 實際旅程需考量班次時刻、轉車時間、天候狀況等因素，總時程可能有所增減。
         </p>
     </div>
@@ -752,7 +1564,7 @@
                 const targetId = this.getAttribute('href').substring(1);
                 const targetSection = document.getElementById(targetId);
                 window.scrollTo({
-                    top: targetSection.offsetTop - 70, // Adjust for navbar height
+                    top: targetSection.offsetTop - 80, // 調整為導航欄高度
                     behavior: 'smooth'
                 });
             });
